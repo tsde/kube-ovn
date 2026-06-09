@@ -308,7 +308,7 @@ func (c *OVNNbClient) GetNat(lrName, natType, externalIP, logicalIP string, igno
 			return nat.LogicalIP == logicalIP
 		}
 		if natType == ovnnb.NATTypeSNAT {
-			return nat.Type == natType && nat.LogicalIP == logicalIP
+			return nat.Type == natType && nat.LogicalIP == logicalIP && nat.ExternalIP == externalIP
 		}
 		return nat.Type == natType && nat.ExternalIP == externalIP
 	}

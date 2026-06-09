@@ -112,7 +112,7 @@ func (suite *OvnClientTestSuite) testUpdateSnat() {
 		lr, err := nbClient.GetLogicalRouter(lrName, false)
 		require.NoError(t, err)
 
-		nat, err := nbClient.GetNat(lrName, natType, "", logicalIP, false)
+		nat, err := nbClient.GetNat(lrName, natType, externalIP, logicalIP, false)
 		require.NoError(t, err)
 
 		require.Contains(t, lr.Nat, nat.UUID)
@@ -123,7 +123,7 @@ func (suite *OvnClientTestSuite) testUpdateSnat() {
 		err = nbClient.UpdateSnat(lrName, externalIP, logicalIP)
 		require.NoError(t, err)
 
-		nat, err := nbClient.GetNat(lrName, natType, "", logicalIP, false)
+		nat, err := nbClient.GetNat(lrName, natType, externalIP, logicalIP, false)
 		require.NoError(t, err)
 		require.Equal(t, externalIP, nat.ExternalIP)
 	})
@@ -256,7 +256,7 @@ func (suite *OvnClientTestSuite) testUpdateNat() {
 	require.NoError(t, err)
 	err = nbClient.UpdateSnat(lrName, externalIP, logicalIP)
 	require.NoError(t, err)
-	nat, err := nbClient.GetNat(lrName, natType, "", logicalIP, false)
+	nat, err := nbClient.GetNat(lrName, natType, externalIP, logicalIP, false)
 	require.NoError(t, err)
 
 	t.Run("update nat", func(t *testing.T) {
